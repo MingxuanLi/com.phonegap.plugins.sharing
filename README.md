@@ -1,0 +1,1 @@
+# com.phonegap.plugins.sharing
