@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
+        id="com.phonegap.plugins.sharing"
+        version="0.0.1">
+
+    <name>Content Sharing Plugin</name>
+    <author>Mingxuan Li, Jason Faulkner - Play IT Interactive</author>
+
+    <engines>
+        <engine name="cordova" version=">=3.4.0"/>
+    </engines>
+
+    <asset src="www/SharingPlugin.js" target="js/SharingPlugin.js"/>
+
+    <js-module src="www/SharingPlugin.js" name="SharingPlugin">
+        <clobbers target="SharingPlugin" />
+    </js-module>
+
+    <platform name="android">
+
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="SharingPlugin">
+                <param name="android-package" value="com.phonegap.plugins.sharing.SharingPlugin"/>
+            </feature>
+        </config-file>
+
+        <config-file target="AndroidManifest.xml" parent="/manifest">
+            <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+        </config-file>
+
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+            <activity android:name="com.phonegap.plugins.sharing.SharingContentHandlerActivity" android:exported="true">
+                <intent-filter>
+                    <action android:name="android.intent.action.SEND" />
+                    <category android:name="android.intent.category.DEFAULT" />
+                    <data android:mimeType="image/*" />
+                </intent-filter>
+                <intent-filter>
+                    <action android:name="android.intent.action.SEND" />
+                    <category android:name="android.intent.category.DEFAULT" />
+                    <data android:mimeType="text/plain" />
+                </intent-filter>
+                <intent-filter>
+                    <action android:name="android.intent.action.SEND_MULTIPLE" />
+                    <category android:name="android.intent.category.DEFAULT" />
+                    <data android:mimeType="image/*" />
+                </intent-filter>
+            </activity>
+        </config-file>
+
+        <source-file src="src/android/SharingPlugin.java" target-dir="src/com/phonegap/plugins/sharing"/>
+        <source-file src="src/android/SharingContentHandlerActivity.java" target-dir="src/com/phonegap/plugins/sharing"/>
+    </platform>
+
+</plugin>
